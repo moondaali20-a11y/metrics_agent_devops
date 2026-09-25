@@ -1,0 +1,39 @@
+services:
+  api:
+    image: ${DOCKERHUB_USERNAME:-local}/metrics_agent:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - metrics-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+  agent:
+    image: ${DOCKERHUB_USERNAME:-local}/metrics_agent:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    # Surcharge la commande par défaut (API) pour lancer le processus agent
+    command: ["python", "-m", "app.agent"]
+    networks:
+      - metrics-network
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+
+networks:
+  metrics-network:
+    driver: bridge

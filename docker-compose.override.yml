@@ -1,0 +1,27 @@
+# Ce fichier est chargé automatiquement en complément de docker-compose.yaml
+# quand on lance : docker compose up
+# (Compose fusionne docker-compose.yaml + docker-compose.override.yml par défaut)
+#
+# Il bascule les deux services en mode DÉVELOPPEMENT :
+#   - build sur Dockerfile.dev (hot-reload)
+#   - montage du code local en volume
+#   - pas d'image publiée requise (build local uniquement)
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: metrics_agent:dev
+    volumes:
+      - .:/app
+    # CMD hot-reload déjà défini dans Dockerfile.dev
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: metrics_agent-agent:dev
+    volumes:
+      - .:/app
+    command: ["python", "-m", "app.agent"]

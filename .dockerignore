@@ -1,0 +1,36 @@
+# Contrôle de version
+.git
+.gitignore
+.github
+
+# Environnements virtuels
+.venv
+venv/
+env/
+
+# Secrets / config locale
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+logs/
+*.log
+
+# OS / éditeurs
+.DS_Store
+.vscode/
+.idea/
+
+# Documentation / divers (pas nécessaire à l'image)
+README.md
+*.md
+docs/
