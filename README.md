@@ -1,9 +1,8 @@
-# 🚀 System Metrics Agent — Conteneurisation, Orchestration & CI/CD
+# System Metrics Agent — Conteneurisation, Orchestration & CI/CD
 
 TP DevOps (Master — Éléments du DevOps) : conteneurisation, orchestration Docker Compose
 et pipeline CI/CD GitHub Actions pour une application Python (FastAPI + psutil).
 
-**Réalisé par** : ousali, [Nom du 2e collaborateur], frederic2001
 
 ---
 
